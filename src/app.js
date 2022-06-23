@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors')
 const mongoose = require('mongoose');
 const productRouter = require('./routes/productRouter');
+const bodyParser = require('body-parser')
 
 const app = express()
 const port = 3017;
@@ -22,10 +23,12 @@ app.use((req, res, next) => {
 app.use(cors());
 
 //! Parsing JSON data
-app.use((req, res, next) => {
-    console.log("Parse request into json so that we can work with them")
-    next();
-});
+app.use(bodyParser.json())
+// app.use((req, res, next) => {
+//     console.log("Parse request into json so that we can work with them")
+
+//     next();
+// });
 
 //! Authorization 
 app.use((req, res, next) => {
