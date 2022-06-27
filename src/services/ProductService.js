@@ -17,6 +17,10 @@ const getProducts = async (req, res, next) => {
 const addNewProduct = async (req, res, next) => {
 
     try {
+        console.log("req.user", req.user)
+        if(!req.user){
+            return res.json({error: 'user not logged in'})
+        }
         
         const productData = req.body.productData;
     
@@ -27,6 +31,7 @@ const addNewProduct = async (req, res, next) => {
         res.send({ product: {...newProduct.toObject(), id: newProduct._id}})
     } catch (error) {
         console.log('error:', error);
+        res.send("error:", error);
     }
 };
 
